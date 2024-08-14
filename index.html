@@ -7,17 +7,35 @@
     <style>
         body {
             background-color: #181818;
+            text-align: center;
+            color: aliceblue;
         }
-        #canvas {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-
+        div {
+            display: block;
+            align-items: center;
         }
     </style>
     <body>
-        <canvas id="canvas"></canvas>
+        <div>
+            <h1> Reaction Diffusion </h1>
+        </div>
+        <div>
+            <canvas id="canvas"></canvas>
+            
+        </div>
+        <div>
+            <select id="list">
+                <option selected value="Square">Square</option>
+                <option value="X">X</option>
+                <option value="Smile">:)</option>
+              </select>
+              <p>
+                Initial config: <span id="changed"></span>
+              </p>
+              <p>
+                Click the canvas to start/pause the simulation.
+              </p>
+        </div>
         <script src="index.js"></script>
     </body>
 </html>
