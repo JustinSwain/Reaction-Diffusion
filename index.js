@@ -1,7 +1,37 @@
-const FEED = 0.055;
-const KILL = 0.062;
-const R_A = 1.0;
-const R_B = 0.5;
+//Default
+// const R_A = 1.0;
+// const R_B = 0.5;
+// const FEED = 0.055;
+// const KILL = 0.062;
+// const DT = 1.0;
+
+//coefficients from https://rajeshrinet.github.io/blog/2016/gray-scott/
+//Bacteria
+// const R_A = 1.4;
+// const R_B = 0.6;
+// const FEED = 0.035;
+// const KILL = 0.065;
+// const DT = 1.0;
+
+// //Coral
+// const R_A = 0.16;
+// const R_B = 0.08;
+// const FEED = 0.060;
+// const KILL = 0.062;
+// const DT = 1.0;
+
+// // Sprials
+// const R_A = 0.12;
+// const R_B = 0.08;
+// const FEED = 0.02;
+// const KILL = 0.05;
+// const DT = 1.0;
+
+// //Zebrafish
+const R_A = 0.16;
+const R_B = 0.08;
+const FEED = 0.035;
+const KILL = 0.06;
 const DT = 1.0;
 
 let canvas = document.getElementById("canvas");
@@ -38,8 +68,8 @@ function init() {
     }
 
     if (initial.textContent === "Square" || initial.textContent === "") {
-        for(let x=100; x<110; x++) {
-            for(let y=100; y<110; y++) {
+        for(let x=80; x<120; x++) {
+            for(let y=80; y<120; y++) {
                 old[x][y].b = 1.0;
             }
         }
@@ -60,6 +90,12 @@ function init() {
         for(let x=60; x<141; x++) {
             for(let y=120; y<130; y++) {
                 old[x][y].b = 1.0;
+            }
+        }
+    } else if (initial.textContent === "Random") {
+        for(let x=0; x<canvas.width; x++) {
+            for(let y=0; y<canvas.height; y++) {
+                old[x][y].b = 0.2 + 0.02*Math.random(1);
             }
         }
     }
@@ -129,11 +165,11 @@ function laplaceB(x,y) {
 }
 
 function drawFrame() {
-    for (var x = 1; x < canvas.width - 1; x++) {
-        for (var y = 1; y < canvas.height - 1; y++) {
+    for (var x = 0; x < canvas.width ; x++) {
+        for (var y = 0; y < canvas.height ; y++) {
             let a = old[x][y].a;
             let b = old[x][y].b;
-            let diff = clamp(a - b);
+            let diff = clamp(a-b);
             let color = getColorRainbow(diff);
             ctx.fillStyle = `rgba(
                 ${color[0]}, 
